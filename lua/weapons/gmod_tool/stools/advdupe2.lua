@@ -13,8 +13,8 @@ TOOL.Name = "#Tool.advdupe2.name"
 cleanup.Register( "AdvDupe2" )
 require "controlpanel"
 
-CreateConVar("AdvDupe2_RestrictUnfreeze", 0, {FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE}, "decides whether or not unfreeze all works")
-CreateConVar("AdvDupe2_Restriction", "trusted", {FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE}, "decides what rank can spawn dupes, case sensitive, use \"\" or nil for unrestricted")
+CreateConVar("AdvDupe2_Restrict_Unfreeze", 0, {FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE}, "decides whether or not unfreeze all works")
+CreateConVar("AdvDupe2_Restrict_Spawns", "trusted", {FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE}, 'decides what rank can spawn dupes, case sensitive, use none, nil, or "" for unrestricted')
 CreateConVar("sbox_maxgmod_contr_spawners",5)
 if(SERVER)then
 
@@ -80,8 +80,8 @@ if(SERVER)then
 		local ply = self:GetOwner()
 		if(not ply.AdvDupe2 or not ply.AdvDupe2.Entities)then return false end
 
-		if !ply:CheckGroup(GetConVarString("advdupe2_restriction")) and string.lower(GetConVarString("advdupe2_restriction"))!="nil" and GetConVarString("advdupe2_restriction")!="" and !ply:IsAdmin() then
-			AdvDupe2.Notify(ply, "only users with a rank that matches or inherits from \""..GetConVarString("advdupe2_restriction").."\" can spawn dupes.",NOTIFY_ERROR)
+		if !ply:CheckGroup(GetConVarString("AdvDupe2_Restrict_Spawns")) and string.lower(GetConVarString("AdvDupe2_Restrict_Spawns"))!="nil" and GetConVarString("AdvDupe2_Restrict_Spawns")!="" and GetConVarString("AdvDupe2_Restrict_Spawns")!="none" and !ply:IsAdmin() then
+			AdvDupe2.Notify(ply, "only users with a rank that matches or inherits from \""..GetConVarString("AdvDupe2_Restrict_Spawns").."\" can spawn dupes.",NOTIFY_ERROR)
 			return false 
 		end
 
@@ -308,8 +308,8 @@ if(SERVER)then
 
 		local ply = self:GetOwner()
 
-		if !ply:CheckGroup(GetConVarString("advdupe2_restriction")) and string.lower(GetConVarString("advdupe2_restriction"))!="nil" and GetConVarString("advdupe2_restriction")!="" and !ply:IsAdmin() then
-			AdvDupe2.Notify(ply, "only users with a rank that matches or inherits from \""..GetConVarString("advdupe2_restriction").."\" can spawn dupes.",NOTIFY_ERROR)
+		if !ply:CheckGroup(GetConVarString("AdvDupe2_Restrict_Spawns")) and string.lower(GetConVarString("AdvDupe2_Restrict_Spawns"))!="nil" and GetConVarString("AdvDupe2_Restrict_Spawns")!="" and GetConVarString("AdvDupe2_Restrict_Spawns")!="none" and !ply:IsAdmin() then
+			AdvDupe2.Notify(ply, "only users with a rank that matches or inherits from \""..GetConVarString("AdvDupe2_Restrict_Spawns").."\" can spawn dupes.",NOTIFY_ERROR)
 			return false 
 		end
 

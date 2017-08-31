@@ -7,7 +7,7 @@ AdvDupe2 = {
 AdvDupe2.DataFolder = "advdupe2" --name of the folder in data where dupes will be saved
 
 AdvDupe2.FileRenameTryLimit = 256
-
+include "advdupe2/readme.lua"
 include "advdupe2/cl_file.lua"
 include "advdupe2/cl_networking.lua"
 include "advdupe2/file_browser.lua"

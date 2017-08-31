@@ -37,7 +37,6 @@ end
 	Params: <entity> Ent
 	Returns: <table> enttable
 ]]
-CreateConVar("AdvDupe2_RestrictUnfreeze", "1", {FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE}, "decides whether or not unfreeze all works")
 /*---------------------------------------------------------
 	Returns a copy of the passed entity's table
 ---------------------------------------------------------*/
@@ -1203,7 +1202,7 @@ local function AdvDupe2_Spawn()
 
 		if(Queue.Current>#Queue.ConstraintList)then
 
-			local unfreeze = (tobool(Queue.Player:GetInfo("advdupe2_paste_unfreeze")) and GetConVarNumber("AdvDupe2_RestrictUnfreeze")==0) or false
+			local unfreeze = (tobool(Queue.Player:GetInfo("advdupe2_paste_unfreeze")) and GetConVarNumber("AdvDupe2_Restrict_Unfreeze")==0) or false
 			local preservefrozenstate = tobool(Queue.Player:GetInfo("advdupe2_preserve_freeze")) or false
 
 			//Remove the undo for stopping pasting
